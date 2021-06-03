@@ -1,16 +1,16 @@
 console.log('this is the service worker!')
 //Week 18 stu mini project as a guide 
 const FILES_TO_CACHE = [
-    `/`,
-    `/index.html`,
-    '/index.js',
-    `/icons/icon-192x192.png`
-    `/icons/icon-512x512.png`
-    `/manifest.webmanifest`
-    `/styles.css`
-    `/db.js`
-    `https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css`
-    `https://cdn.jsdelivr.net/npm/chart.js@2.8.0`
+    "/",
+    "/index.html",
+    "/index.js",
+    "/icons/icon-192x192.png",
+    "/icons/icon-512x512.png",
+    "/manifest.webmanifest",
+    "/styles.css",
+    "/db.js",
+    "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
+    "https://cdn.jsdelivr.net/npm/chart.js@2.8.0"
 
 
 ]
@@ -58,8 +58,8 @@ self.addEventListener('install', (event) => {
 })
 
 
-self.addEventListener('fetch', (event) => {
-    if(event.request.url.includes('/api/transaction')){
+self.addEventListener('fetch', function (event){
+    if(event.request.url.includes('/api/')){
         event.respondWith(
             caches.open(RUNTIME).then((cache) => {
                 return fetch(event.request)
