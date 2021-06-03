@@ -1,4 +1,5 @@
 console.log('this is the service worker!')
+
 //Week 18 stu mini project as a guide 
 const FILES_TO_CACHE = [
     "/",
@@ -58,32 +59,30 @@ self.addEventListener('install', (event) => {
 })
 
 
-self.addEventListener('fetch', function (event){
-    if(event.request.url.includes('/api/')){
+self.addEventListener("fetch", function(event){
+
+    if (event.request.url.includes("/api/")) {
+        //if involves api 
         event.respondWith(
-            caches.open(RUNTIME).then((cache) => {
+            caches.open(RUNTIME).then(cache => {
                 return fetch(event.request)
-                .then((response) =>{
-                    if(response.status == 200){
-                        cache.put(event.request.url, response.clone())
-                    }
-                    return response;
-                })
-                .catch((err) => {
-                    return cache.match(event.request);
-                });
-            })
-            .catch((err) => console.log(err))
-        )
+                    .then(response => {
+                        if (response.status === 200) {
+                            console.log('status 200 clone/store data')
+                            cache.put(event.request.url, response.clone());
+                        }
+                        return response;
+                    }).catch(err => {
+                        console.log('status offline')
+                        return cache.match(event.request);
+                    });
+            }).catch((error) => console.log(error))
+        );
         return;
     }
     event.respondWith(
-        caches.open(PRECACHE)
-        .then((cache) => {
-            return cache.match(event.request)
-            .then((response) => {
-                return response || fetch(event.request);
-            })
+        caches.match(event.request).then((response) => {
+            return response || fetch(event.request);
         })
-    )
-})
+    );
+});
