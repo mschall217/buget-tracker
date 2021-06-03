@@ -3,7 +3,7 @@
 let db;
 let budgetVersion;
 
-const request = indexedDB.open("budget",budgetVersion || 21);
+const request = indexedDB.open("budget", budgetVersion || 21);
 
 //creating a new db request for the budget databases
 request.onupgradeneeded = (event) => {
@@ -18,7 +18,7 @@ request.onupgradeneeded = (event) => {
     db = event.target.result;
 
     if(db.objectStoreNames.length === 0){
-        db.createObjectStore('BudgetStore', {autoIncrement: true});
+        db.createObjectStore('budgetStore', {autoIncrement: true});
     }
 
 };
@@ -32,10 +32,10 @@ const checkDatabase = () => {
     console.log('check db started');
 
     //open a transaction from BudgetStore db
-    let transaction = db.transaction(['BudgetStore'], 'readwrite');
+    let transaction = db.transaction(['budgetStore'], 'readwrite');
 
     //access BusgetStore Object 
-    const store = transaction.objectStore('BudgetStore');
+    const store = transaction.objectStore('budgetStore');
 
     //get all records from store and put in one variable 
     const getAll = store.getAll();
@@ -57,10 +57,10 @@ const checkDatabase = () => {
                 //if response not empty run 
                 if(res.length !==0) {
                     //open another transaction to Budget store to read/write
-                    transaction = db.transaction(['BudgetStore'], 'readwrite');
+                    transaction = db.transaction(['budgetStore'], 'readwrite');
 
                     //assign the current store to a variable
-                    const currentStore = transaction.objectStore('BudgetStore');
+                    const currentStore = transaction.objectStore('budgetStore');
 
                     //Clear existing entries because our bulk add was successful 
                     currentStore.clear();
@@ -87,10 +87,10 @@ const saveRecord = (record) => {
     console.log('save record started');
 
     //creat transaction to read and write 
-    const transaction = db.transaction(['BudgetStore'], 'readwrite');
+    const transaction = db.transaction(['budgetStore'], 'readwrite');
 
     //access BudgetStore object store 
-    const store = transaction.objectStore('BudgetStore');
+    const store = transaction.objectStore('budgetStore');
 
     //add record to store with add method
     store.add(record);
