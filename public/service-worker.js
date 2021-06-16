@@ -12,8 +12,6 @@ const FILES_TO_CACHE = [
     "/db.js",
     "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
     "https://cdn.jsdelivr.net/npm/chart.js@2.8.0"
-
-
 ]
 
 
@@ -36,15 +34,15 @@ self.addEventListener('install', (event) => {
 
   //activate handler to clean up old caches 
 
-  self.addEventListener("activate", (event) => {
+  self.addEventListener('activate', (event) => {
     const currentCaches = [PRECACHE, RUNTIME]
     event.waitUntil(
         caches
         .keys()
-        .then(cacheNames => {
+        .then((cacheNames) => {
           // return array of cache names that are old to delete
           return cacheNames.filter(
-            cacheName => !currentCaches.includes(cacheName)
+            (cacheName) => !currentCaches.includes(cacheName)
          );
         })
         .then(cachesToDelete => {
@@ -61,28 +59,33 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener("fetch", function(event){
 
-    if (event.request.url.includes("/api/")) {
+    if (event.request.url.includes('/api/')) {
         //if involves api 
         event.respondWith(
-            caches.open(RUNTIME).then(cache => {
+            caches.open(RUNTIME).then((cache) => {
                 return fetch(event.request)
-                    .then(response => {
+                    .then((response) => {
                         if (response.status === 200) {
                             console.log('status 200 clone/store data')
                             cache.put(event.request.url, response.clone());
                         }
                         return response;
-                    }).catch(err => {
+                    }).catch((error) => {
                         console.log('status offline')
                         return cache.match(event.request);
                     });
-            }).catch((error) => console.log(error))
+            })
+            .catch((error) => console.log(error))
         );
         return;
     }
     event.respondWith(
-        caches.match(event.request).then((response) => {
+        caches.open(PRECACHE)
+        .then((cache) => {
+          return cache.match(event.request)
+          .then((response) => {
             return response || fetch(event.request);
+          });
         })
-    );
+      );
 });

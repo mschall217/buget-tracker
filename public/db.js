@@ -23,7 +23,7 @@ request.onupgradeneeded = (event) => {
 
 };
 
-//catch adn display errors
+//catch and display errors
 request.onerror = (event) => {
     console.log(`error has occured ${event.target.errorCode}`)
 }
