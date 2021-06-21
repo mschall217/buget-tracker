@@ -18,7 +18,7 @@ Giving users a fast and easy way to track their money is important, but allowing
 
    The key tools to making this project work are npm packages. This app is fully funcitoning at the deployed link https://limitless-depths-36000.herokuapp.com/
   
-  If forked locally make sure you run npm i to make sure all the node packages required are available to you. 
+  If forked locally make sure you run npm i to make sure all the node packages required are available to you. You can then check its functionality by using google dev tools and going to the application tab. There is an offline feature, turn it on and off to plan your finances with and without wifi! 
 
   ## Usage
   
