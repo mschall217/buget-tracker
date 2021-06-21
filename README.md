@@ -26,7 +26,7 @@ Giving users a fast and easy way to track their money is important, but allowing
 
   ## Gif 
 
-  ![gif]()
+  ![gif](video/budget-tracker.gif)
   
   ## Support
   
