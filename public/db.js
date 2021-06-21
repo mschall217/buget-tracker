@@ -79,7 +79,7 @@ request.onsuccess = (event) => {
 
     if(navigator.onLine){
         console.log('back online')
-        checkoutDatabase();
+        checkDatabase();
     }
 };
 

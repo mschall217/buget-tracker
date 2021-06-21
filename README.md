@@ -16,11 +16,13 @@ Giving users a fast and easy way to track their money is important, but allowing
   
   ## Installation
 
- 
+   The key tools to making this project work are npm packages. This app is fully funcitoning at the deployed link https://limitless-depths-36000.herokuapp.com/
+  
+  If forked locally make sure you run npm i to make sure all the node packages required are available to you. 
 
   ## Usage
   
-
+  This simple application can help any user keep track of simple finacnces on or offline. This app is user friendly and provides a user with an accurate way to track their spend anywhere! 
 
   ## Gif 
 

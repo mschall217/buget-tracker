@@ -1,3 +1,4 @@
+
 let transactions = [];
 let myChart;
 
@@ -8,7 +9,7 @@ fetch("/api/transaction")
   .then(data => {
     // save db data on global variable
     transactions = data;
-    console.log((new Date()).toISOString(), data)
+
     populateTotal();
     populateTable();
     populateChart();
